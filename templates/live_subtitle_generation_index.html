@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Live Stream</title>
+    <style>
+      #container {
+        display: flex;
+        border: 1px solid black;
+      }
+      #video-container {
+        flex: 1;
+        margin-right: 20px;
+      }
+      #transcription-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      #transcription-container h2 {
+        margin-top: 0;
+      }
+      #transcription-list {
+        margin-top: 10px;
+        font-size: 16px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#start-button").click(function(){
+            var startButton = document.getElementById('start-button');
+            startButton.style.display = "none";
+            var stopButton = document.getElementById('stop-button');
+            stopButton.style.display = "block";
+            
+          $.get("/start-transcription");
+          setInterval(function(){
+            $.get("/get-transcription", function(data){
+              $("#transcription-list").html(data);
+            });
+          }, 2000);
+        });
+        $("#stop-button").click(function(){
+            var stopButton = document.getElementById('stop-button');
+            stopButton.style.display = "none";
+            var startButton = document.getElementById('start-button');
+            startButton.innerHTML = "Resume Transcription";
+            startButton.style.display = "block";
+            
+            $.get("/stop-transcription");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="video-container">
+        <h2>Live Video Stream</h2>
+        <img src="{{ url_for('video') }}" width="640" height="480">
+        <br>
+        <button id="start-button">Start Transcription</button>
+        <button id="stop-button" style="display: none">Stop Transcription</button>
+      </div>
+      <div id="transcription-container">
+        <h2>Audio Transcription</h2>
+        <div id="transcription-list"></div>
+      </div>
+    </div>
+  </body>
+</html>

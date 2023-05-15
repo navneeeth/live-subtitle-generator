@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <!-- Material UI styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Video with Subtitles</h1>
+        <br>
+        <br>
+        <video id="video-player" width="320" height="240" controls>
+            <source src="{{ url_for('static', filename='files/output.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <br>
+        <a id="download-link" href="{{ url_for('download_file') }}" download>
+            <button id="download-button" class="btn waves-effect waves-light" type="submit" name="action">Download Video
+                <i class="material-icons right">file_download</i>
+            </button>
+        </a>
+    </div>
+</body>
+</html>
