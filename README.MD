@@ -3,6 +3,9 @@
 
 The Video Subtitle Generator is a project that combines the capabilities of PyAudio, opencv-python, OpenAI's Whisper API, and Deepgram API to generate subtitles for videos both uploaded and live. 
 
+Name: Navneeth Krishna Madhuranath
+NET ID: nm3932
+
 The project contains two components (expand to view code documentation):
 
 ## 1) Live Subtitle Generation
@@ -67,6 +70,36 @@ This code sets up a Flask web application that performs live audio transcription
 ### `live_subtitle_generation_index.html`
 
 #### Description
+
+This HTML file represents a web page that displays a live video stream and provides functionality for starting and stopping audio transcription. The page layout is organized into two containers: one for the video stream and another for the transcription display. JavaScript code is used to handle button clicks and update the transcription data dynamically using AJAX requests. CSS styles define the visual appearance and layout of the page elements.
+
+#### Steps
+
+1. The HTML document begins with the standard doctype declaration and opening `<html>` tag.
+
+2. The `<head>` section contains metadata and styles.
+   - The character encoding is set to UTF-8.
+   - The page title is set to "Live Stream".
+   - CSS styles are defined within `<style>` tags.
+   - The CSS styles define the layout and appearance of various containers and elements on the page.
+
+3. The required jQuery library is included using a CDN link.
+
+4. Inside a `<script>` tag, JavaScript code is written to handle button clicks and perform AJAX requests.
+   - The JavaScript code is wrapped in a jQuery `$(document).ready()` function to ensure it executes when the document is fully loaded.
+   - The code attaches event listeners to the "Start Transcription" and "Stop Transcription" buttons.
+   - When the "Start Transcription" button is clicked, it triggers an AJAX GET request to the "/start-transcription" route on the server.
+   - An interval function is set up to periodically send AJAX GET requests to the "/get-transcription" route and update the transcription list on the page.
+   - When the "Stop Transcription" button is clicked, it triggers an AJAX GET request to the "/stop-transcription" route on the server.
+
+5. The `<body>` section contains the main content of the page.
+   - The content is wrapped in a `<div>` element with the id "container" for layout purposes.
+   - Inside the container, there are two sub-containers: "video-container" and "transcription-container".
+   - The "video-container" displays a heading "Live Video Stream" and an `<img>` element with a source set using a Flask template tag (`{{ url_for('video') }}`). The image has a fixed width and height.
+   - Below the image, there are two buttons: "Start Transcription" and "Stop Transcription". The "Stop Transcription" button is initially hidden using inline CSS.
+   - The "transcription-container" displays a heading "Audio Transcription" and an empty `<div>` element with the id "transcription-list". This element will be populated dynamically with transcription data.
+
+6. The HTML document is closed with the closing `</body>` and `</html>` tags.
 
 
 
